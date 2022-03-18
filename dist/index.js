@@ -55110,7 +55110,7 @@ try {
     if (typeof destFileName !== 'string' || destFileName === '') {
         throw new Error(`destFileName: the input is invalid : ${destFileName}`);
     }
-    if (typeof srcFileName !== 'string' || srcFileName !== '') {
+    if (typeof srcFileName !== 'string' || srcFileName === '') {
         throw new Error(`srcFileName: the input is invalid : ${srcFileName}`);
     }
     const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
