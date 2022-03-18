@@ -31,17 +31,20 @@ id of file that is sended into Google Drive.
 ## Example usage
 
 ```yaml
-- name: Collect
-  id: collect
-  uses: hankei6km/collect-labels-from-release-note@v0.2.0
+- id: 'auth'
+  name: 'Authenticate to Google Cloud'
+  uses: 'google-github-actions/auth@v0'
   with:
-    token: ${{ secrets.GITHUB_TOKEN}}
-    repository: hankei6km/collect-labels-from-release-note
-    tag_name: v0.2.x
-- name: Contains item
-  run: test "${CONTAIN}" = "true"
-  env:
-    CONTAIN: ${{ contains(toJson(steps.collect.outputs.labels), 'testing') }}
+    workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+    service_account: ${{ secrets.SERVICE_ACCOUNT }}
+
+- name: Send file
+  id: send
+  uses: hankei6km/gdrive-act-send@v0.1.1
+  with:
+    parent-id: ${{ secrets.PARENT_ID }}
+    dest-file-name: ${{ secrets.DEST_FILE_NAME }}
+    src-file-name: ${{ secrets.SRC_FILE_NAME }}
 ```
 
 ## Licenses
