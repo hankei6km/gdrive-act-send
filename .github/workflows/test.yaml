@@ -64,4 +64,4 @@ jobs:
       - name: Check file-id
         run: test -n "${FILE_ID}"
         env:
-          FILE_ID: ${{ steps.send.file-id }}
+          FILE_ID: ${{ steps.send.outputs.file-id }}
