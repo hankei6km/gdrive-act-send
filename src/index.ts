@@ -28,7 +28,7 @@ try {
     destFileName,
     srcFileName
   )
-  core.setOutput('labels', file_id)
+  core.setOutput('file-id', file_id)
 } catch (err: any) {
   core.setFailed(err.message)
 }

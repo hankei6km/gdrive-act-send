@@ -55118,7 +55118,7 @@ try {
         scopes: SCOPES
     });
     const file_id = await (0,guratan__WEBPACK_IMPORTED_MODULE_3__/* .sendFile */ .k)((0,_googleapis_drive__WEBPACK_IMPORTED_MODULE_2__/* .drive */ .Ag)({ version: 'v3', auth }), parentId, destFileName, srcFileName);
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('labels', file_id);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('file-id', file_id);
 }
 catch (err) {
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(err.message);
