@@ -57,9 +57,9 @@ jobs:
         continue-on-error: true
         uses: ./
         with:
-          parent_id: ${{ secrets.PARENT_ID }}
-          dest_file_name: gdrive-act-send-test-readme.md
-          src_file_name: README.md
+          parent-id: ${{ secrets.PARENT_ID }}
+          dest-file-name: gdrive-act-send-test-readme.md
+          src-file-name: README.md
 
       - name: Check file-id
         run: test -n "${FILE_ID}"
