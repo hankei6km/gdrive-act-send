@@ -37,6 +37,9 @@ jobs:
         run: npm run test:build
 
   test-main:
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     runs-on: ubuntu-latest
     name: Test main
     steps:
