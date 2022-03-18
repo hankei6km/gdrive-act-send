@@ -1,0 +1,64 @@
+name: Test action code
+on:
+  push:
+    branches:
+      - '**'
+      #- '!main'
+    tags:
+      - '!v*'
+
+jobs:
+  test-modules:
+    runs-on: ubuntu-latest
+    name: Test modiules
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-push-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-push-${{ env.cache-name }}-
+            ${{ runner.os }}-push-
+
+      - name: Install modules
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test:build
+
+  test-main:
+    runs-on: ubuntu-latest
+    name: Test main
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.SERVICE_ACCOUNT }}
+
+      - name: send
+        id: send
+        continue-on-error: true
+        uses: ./
+        with:
+          parent_id: ${{ secrets.PARENT_ID }}
+          dest_file_name: gdrive-act-send-test-readme.md
+          src_file_name: README.md
+
+      - name: Check file-id
+        run: test -n "${FILE_ID}"
+        env:
+          FILE_ID: ${{ steps.send.file-id }}
