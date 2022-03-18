@@ -54,7 +54,6 @@ jobs:
 
       - name: Send file(normal end)
         id: send
-        continue-on-error: true
         uses: ./
         with:
           parent-id: ${{ secrets.PARENT_ID }}
