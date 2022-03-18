@@ -1,0 +1,21 @@
+name: 'Google Drive tools'
+description: 'Google Drive tools'
+inputs:
+  parent-id:
+    description: 'id of folder on Google Drive'
+    required: true
+    default: ''
+  dest-file-name:
+    description: 'file name in Google Drive'
+    required: true
+    default: ''
+  src-file-name:
+    description: 'file name in local filesystem'
+    required: true
+    default: ''
+outputs:
+  file-id:
+    description: 'id of file that is sended into Google Drive'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
