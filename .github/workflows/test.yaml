@@ -56,7 +56,7 @@ jobs:
         id: send
         uses: ./
         with:
-          parent-id: ${{ secrets.PARENT_ID }}
+          parent_id: ${{ secrets.PARENT_ID }}
           dest_file_name: gdrive-act-send-test-readme.md
           src_file_name: README.md
 
