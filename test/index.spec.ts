@@ -39,7 +39,7 @@ describe('index', () => {
         resolve([stdout.toString(), stderr.toString()])
       })
     })
-    expect(stdout).toMatch(/\:\:error\:\:parentId\: the input is invalid \:/)
+    expect(stdout).toMatch(/\:\:error\:\:parent_id\: the input is invalid \:/)
     expect(stderr).toEqual('')
   })
   it('should print error message(destFileName = blank)', async () => {
@@ -52,7 +52,7 @@ describe('index', () => {
       })
     })
     expect(stdout).toMatch(
-      /\:\:error\:\:destFileName\: the input is invalid \:/
+      /\:\:error\:\:dest_file_name\: the input is invalid \:/
     )
     expect(stderr).toEqual('')
   })
@@ -65,7 +65,9 @@ describe('index', () => {
         resolve([stdout.toString(), stderr.toString()])
       })
     })
-    expect(stdout).toMatch(/\:\:error\:\:srcFileName\: the input is invalid \:/)
+    expect(stdout).toMatch(
+      /\:\:error\:\:src_file_name\: the input is invalid \:/
+    )
     expect(stderr).toEqual('')
   })
 })

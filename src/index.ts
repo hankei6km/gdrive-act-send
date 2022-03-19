@@ -8,13 +8,13 @@ try {
   const destFileName = core.getInput('dest_file_name')
   const srcFileName = core.getInput('src_file_name')
   if (typeof parentId !== 'string' || parentId === '') {
-    throw new Error(`parentId: the input is invalid : ${parentId}`)
+    throw new Error(`parent_id: the input is invalid : ${parentId}`)
   }
   if (typeof destFileName !== 'string' || destFileName === '') {
-    throw new Error(`destFileName: the input is invalid : ${destFileName}`)
+    throw new Error(`dest_file_name: the input is invalid : ${destFileName}`)
   }
   if (typeof srcFileName !== 'string' || srcFileName === '') {
-    throw new Error(`srcFileName: the input is invalid : ${srcFileName}`)
+    throw new Error(`src_file_name: the input is invalid : ${srcFileName}`)
   }
 
   const SCOPES = ['https://www.googleapis.com/auth/drive.file']
