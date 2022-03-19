@@ -4,9 +4,9 @@ import { drive as gdrive } from '@googleapis/drive'
 import { sendFile } from 'guratan'
 
 try {
-  const parentId = core.getInput('parent-id')
-  const destFileName = core.getInput('dest-file-name')
-  const srcFileName = core.getInput('src-file-name')
+  const parentId = core.getInput('parent_id')
+  const destFileName = core.getInput('dest_file_name')
+  const srcFileName = core.getInput('src_file_name')
   if (typeof parentId !== 'string' || parentId === '') {
     throw new Error(`parentId: the input is invalid : ${parentId}`)
   }
@@ -28,7 +28,7 @@ try {
     destFileName,
     srcFileName
   )
-  core.setOutput('file-id', file_id)
+  core.setOutput('file_id', file_id)
 } catch (err: any) {
   core.setFailed(err.message)
 }
