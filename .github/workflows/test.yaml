@@ -57,22 +57,22 @@ jobs:
         uses: ./
         with:
           parent-id: ${{ secrets.PARENT_ID }}
-          dest-file-name: gdrive-act-send-test-readme.md
-          src-file-name: README.md
+          dest_file_name: gdrive-act-send-test-readme.md
+          src_file_name: README.md
 
-      - name: Check file-id
+      - name: Check file_id
         run: test -n "${FILE_ID}"
         env:
-          FILE_ID: ${{ steps.send.outputs.file-id }}
+          FILE_ID: ${{ steps.send.outputs.file_id }}
 
       - name: Send file(src is not exist)
         id: send_failed
         continue-on-error: true
         uses: ./
         with:
-          parent-id: ${{ secrets.PARENT_ID }}
-          dest-file-name: gdrive-act-send-test-readme.md
-          src-file-name: README_test.md
+          parent_id: ${{ secrets.PARENT_ID }}
+          dest_file_name: gdrive-act-send-test-readme.md
+          src_file_name: README_test.md
 
       - name: Check failure
         run: test "${FAILURE}" = "failure"
