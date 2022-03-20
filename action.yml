@@ -1,5 +1,5 @@
-name: 'Action Google Drive send'
-description: 'Action send file to Google Drive'
+name: 'Google Drive tools Action - send'
+description: 'This action sends a file to Google Drive'
 inputs:
   parent_id:
     description: 'The ID of the parent folders in remote'
