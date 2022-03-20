@@ -55100,6 +55100,8 @@ try {
     const parentId = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('parent_id');
     const destFileName = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('dest_file_name');
     const srcFileName = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('src_file_name');
+    const destMimeType = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('dest_mime_type');
+    const srcMimeType = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('src_mime_type');
     if (typeof parentId !== 'string' || parentId === '') {
         throw new Error(`parent_id: the input is invalid : ${parentId}`);
     }
@@ -55109,12 +55111,18 @@ try {
     if (typeof srcFileName !== 'string' || srcFileName === '') {
         throw new Error(`src_file_name: the input is invalid : ${srcFileName}`);
     }
+    if (typeof destMimeType !== 'string') {
+        throw new Error(`dest_mime_type: the input is invalid : ${destMimeType}`);
+    }
+    if (typeof srcMimeType !== 'string') {
+        throw new Error(`src_mime_type: the input is invalid : ${srcMimeType}`);
+    }
     const file_id = await (0,guratan__WEBPACK_IMPORTED_MODULE_1__/* .sendFile */ .kB)((0,guratan__WEBPACK_IMPORTED_MODULE_1__/* .driveClient */ .GQ)(), {
         parentId,
         destFileName,
         srcFileName,
-        destMimeType: '',
-        srcMimeType: ''
+        destMimeType,
+        srcMimeType
     });
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('file_id', file_id);
 }
