@@ -11,8 +11,8 @@ This action sends a file to Google Drive.
 | parent_id | The ID of the parent folders in remote | `true` |  |
 | dest_file_name | The name of the file in remote | `true` |  |
 | src_file_name | The name(path) of the file in local filesystem | `true` |  |
-| dest-mime-type | The MIME type of the file. | `false` |  |
-| src-mime-type | Media mime-type | `false` |  |
+| dest_mime_type | The MIME type of the file. | `false` |  |
+| src_mime_type | Media mime-type | `false` |  |
 
 
 ## Outputs
