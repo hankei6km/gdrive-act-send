@@ -55101,24 +55101,24 @@ __nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__) => {
 
 
 try {
-    const parentId = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('parent-id');
-    const destFileName = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('dest-file-name');
-    const srcFileName = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('src-file-name');
+    const parentId = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('parent_id');
+    const destFileName = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('dest_file_name');
+    const srcFileName = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('src_file_name');
     if (typeof parentId !== 'string' || parentId === '') {
-        throw new Error(`parentId: the input is invalid : ${parentId}`);
+        throw new Error(`parent_id: the input is invalid : ${parentId}`);
     }
     if (typeof destFileName !== 'string' || destFileName === '') {
-        throw new Error(`destFileName: the input is invalid : ${destFileName}`);
+        throw new Error(`dest_file_name: the input is invalid : ${destFileName}`);
     }
     if (typeof srcFileName !== 'string' || srcFileName === '') {
-        throw new Error(`srcFileName: the input is invalid : ${srcFileName}`);
+        throw new Error(`src_file_name: the input is invalid : ${srcFileName}`);
     }
     const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
     const auth = new google_auth_library__WEBPACK_IMPORTED_MODULE_1__.GoogleAuth({
         scopes: SCOPES
     });
     const file_id = await (0,guratan__WEBPACK_IMPORTED_MODULE_3__/* .sendFile */ .k)((0,_googleapis_drive__WEBPACK_IMPORTED_MODULE_2__/* .drive */ .Ag)({ version: 'v3', auth }), parentId, destFileName, srcFileName);
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('file-id', file_id);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('file_id', file_id);
 }
 catch (err) {
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(err.message);
