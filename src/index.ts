@@ -1,7 +1,5 @@
 import * as core from '@actions/core'
-import { GoogleAuth } from 'google-auth-library'
-import { drive as gdrive } from '@googleapis/drive'
-import { sendFile } from 'guratan'
+import { driveClient, sendFile } from 'guratan'
 
 try {
   const parentId = core.getInput('parent_id')
@@ -17,17 +15,13 @@ try {
     throw new Error(`src_file_name: the input is invalid : ${srcFileName}`)
   }
 
-  const SCOPES = ['https://www.googleapis.com/auth/drive.file']
-  const auth = new GoogleAuth({
-    scopes: SCOPES
-  })
-
-  const file_id = await sendFile(
-    gdrive({ version: 'v3', auth }),
+  const file_id = await sendFile(driveClient(), {
     parentId,
     destFileName,
-    srcFileName
-  )
+    srcFileName,
+    destMimeType: '',
+    srcMimeType: ''
+  })
   core.setOutput('file_id', file_id)
 } catch (err: any) {
   core.setFailed(err.message)
