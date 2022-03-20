@@ -65,6 +65,28 @@ jobs:
         env:
           FILE_ID: ${{ steps.send.outputs.file_id }}
 
+      - name: Send file(with mime type)
+        id: send_with_mime
+        uses: ./
+        with:
+          parent_id: ${{ secrets.PARENT_ID }}
+          dest_file_name: gdrive-act-send-test-readme.doc
+          src_file_name: README.md
+          dest_mime_type: application/vnd.google-apps.document
+          src_mime_type: text/markdown
+
+      # mimeType ありで upload されている場合、
+      # 上書きするには local 側の mimeType の指定がなければエラーになる(はず)
+      - name: Send file(with mime type 2)
+        id: send_with_mime2
+        uses: ./
+        with:
+          parent_id: ${{ secrets.PARENT_ID }}
+          dest_file_name: gdrive-act-send-test-readme.doc
+          src_file_name: README.md
+          dest_mime_type: application/vnd.google-apps.document
+          src_mime_type: text/markdown
+
       - name: Send file(src is not exist)
         id: send_failed
         continue-on-error: true

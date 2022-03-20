@@ -5,6 +5,8 @@ try {
   const parentId = core.getInput('parent_id')
   const destFileName = core.getInput('dest_file_name')
   const srcFileName = core.getInput('src_file_name')
+  const destMimeType = core.getInput('dest_mime_type')
+  const srcMimeType = core.getInput('src_mime_type')
   if (typeof parentId !== 'string' || parentId === '') {
     throw new Error(`parent_id: the input is invalid : ${parentId}`)
   }
@@ -14,13 +16,19 @@ try {
   if (typeof srcFileName !== 'string' || srcFileName === '') {
     throw new Error(`src_file_name: the input is invalid : ${srcFileName}`)
   }
+  if (typeof destMimeType !== 'string') {
+    throw new Error(`dest_mime_type: the input is invalid : ${destMimeType}`)
+  }
+  if (typeof srcMimeType !== 'string') {
+    throw new Error(`src_mime_type: the input is invalid : ${srcMimeType}`)
+  }
 
   const file_id = await sendFile(driveClient(), {
     parentId,
     destFileName,
     srcFileName,
-    destMimeType: '',
-    srcMimeType: ''
+    destMimeType,
+    srcMimeType
   })
   core.setOutput('file_id', file_id)
 } catch (err: any) {

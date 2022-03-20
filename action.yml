@@ -13,6 +13,14 @@ inputs:
     description: 'The name(path) of the file in local filesystem'
     required: true
     default: ''
+  dest-mime-type:
+    description: 'The MIME type of the file.'
+    required: false
+    default: ''
+  src-mime-type:
+    description: 'Media mime-type'
+    required: false
+    default: ''
 outputs:
   file_id:
     description: 'The ID of the file that is sended into Google Drive'
