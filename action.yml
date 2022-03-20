@@ -13,11 +13,11 @@ inputs:
     description: 'The name(path) of the file in local filesystem'
     required: true
     default: ''
-  dest-mime-type:
+  dest_mime_type:
     description: 'The MIME type of the file.'
     required: false
     default: ''
-  src-mime-type:
+  src_mime_type:
     description: 'Media mime-type'
     required: false
     default: ''
