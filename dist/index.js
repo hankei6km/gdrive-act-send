@@ -55093,11 +55093,7 @@ try {
 __nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__) => {
 /* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(2186);
 /* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var google_auth_library__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(810);
-/* harmony import */ var _googleapis_drive__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(2476);
-/* harmony import */ var guratan__WEBPACK_IMPORTED_MODULE_3__ = __nccwpck_require__(3372);
-
-
+/* harmony import */ var guratan__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(326);
 
 
 try {
@@ -55113,11 +55109,13 @@ try {
     if (typeof srcFileName !== 'string' || srcFileName === '') {
         throw new Error(`src_file_name: the input is invalid : ${srcFileName}`);
     }
-    const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
-    const auth = new google_auth_library__WEBPACK_IMPORTED_MODULE_1__.GoogleAuth({
-        scopes: SCOPES
+    const file_id = await (0,guratan__WEBPACK_IMPORTED_MODULE_1__/* .sendFile */ .kB)((0,guratan__WEBPACK_IMPORTED_MODULE_1__/* .driveClient */ .GQ)(), {
+        parentId,
+        destFileName,
+        srcFileName,
+        destMimeType: '',
+        srcMimeType: ''
     });
-    const file_id = await (0,guratan__WEBPACK_IMPORTED_MODULE_3__/* .sendFile */ .k)((0,_googleapis_drive__WEBPACK_IMPORTED_MODULE_2__/* .drive */ .Ag)({ version: 'v3', auth }), parentId, destFileName, srcFileName);
     _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('file_id', file_id);
 }
 catch (err) {
@@ -55284,25 +55282,54 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("zlib");
 
 /***/ }),
 
-/***/ 3372:
+/***/ 326:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
 
 
 // EXPORTS
 __nccwpck_require__.d(__webpack_exports__, {
-  "k": () => (/* reexport */ sendFile)
+  "GQ": () => (/* reexport */ driveClient),
+  "kB": () => (/* reexport */ sendFile)
 });
+
+// UNUSED EXPORTS: createPermisson
+
+// EXTERNAL MODULE: ./node_modules/google-auth-library/build/src/index.js
+var src = __nccwpck_require__(810);
+// EXTERNAL MODULE: ./node_modules/@googleapis/drive/build/index.js
+var build = __nccwpck_require__(2476);
+;// CONCATENATED MODULE: ./node_modules/guratan/dist/tdrive.js
+
+
+/**
+ * Validate value that is used in query parameter.
+ * return false if value has included "'">
+ * @param s - value string.
+ * @returns result of validation.
+ */
+function validateQueryValue(s) {
+    if (s.indexOf("'") >= 0) {
+        return false;
+    }
+    return true;
+}
+/**
+ * Make instacen of drive that is authenticated.
+ * @returns instance of drive.
+ */
+function driveClient() {
+    const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
+    const auth = new src.GoogleAuth({
+        scopes: SCOPES
+    });
+    return (0,build/* drive */.Ag)({ version: 'v3', auth });
+}
 
 // EXTERNAL MODULE: external "path"
 var external_path_ = __nccwpck_require__(1017);
 // EXTERNAL MODULE: external "fs"
 var external_fs_ = __nccwpck_require__(7147);
-// EXTERNAL MODULE: ./node_modules/@googleapis/drive/build/index.js
-var build = __nccwpck_require__(2476);
-// EXTERNAL MODULE: ./node_modules/google-auth-library/build/src/index.js
-var src = __nccwpck_require__(810);
 ;// CONCATENATED MODULE: ./node_modules/guratan/dist/tsend.js
-
 
 
 
@@ -55326,29 +55353,6 @@ class UpdateFileError extends Error {
         super(message);
         Object.setPrototypeOf(this, UpdateFileError.prototype);
     }
-}
-/**
- * Validate value that is used in query parameter.
- * return false if value has included "'">
- * @param s - value string.
- * @returns result of validation.
- */
-function validateQueryValue(s) {
-    if (s.indexOf("'") >= 0) {
-        return false;
-    }
-    return true;
-}
-/**
- * Make instacen of drive that is authenticated.
- * @returns instance of drive.
- */
-function driveClient() {
-    const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
-    const auth = new GoogleAuth({
-        scopes: SCOPES
-    });
-    return gdrive({ version: 'v3', auth });
 }
 /**
  * Get file id in spesiced parent.
@@ -55385,24 +55389,29 @@ async function getFileId(drive, parentId, fileName) {
 /**
  * Create file using by source file into Google Drive.
  * @param drive - drive instance.
- * @param parentId  - id of folder in Google Deive.
- * @param destFileName - file name in Google Drive.
- * @param srcFileName - file name in local filesystem.
- * @returns id of file in Google Drive
+ * @param opts - options.
+ * @returns Print the id of the file that is sended into remote
  */
-async function uploadFile(drive, parentId, destFileName, srcFileName) {
+async function uploadFile(drive, opts) {
     try {
-        const res = await drive.files.create({
+        const { parentId, destFileName, srcFileName, destMimeType, srcMimeType } = opts;
+        const params = {
             requestBody: {
                 name: external_path_.basename(destFileName),
                 parents: [parentId]
             },
             media: {
-                // mimeType: 'image/jpeg',
                 body: external_fs_.createReadStream(srcFileName)
             },
             fields: 'id'
-        });
+        };
+        if (destMimeType) {
+            params.requestBody.mimeType = destMimeType;
+        }
+        if (srcMimeType) {
+            params.media.mimeType = srcMimeType;
+        }
+        const res = await drive.files.create(params);
         return res.data.id || '';
     }
     catch (err) {
@@ -55412,48 +55421,143 @@ async function uploadFile(drive, parentId, destFileName, srcFileName) {
 /**
  * Update file using by source file into Google Drive.
  * @param drive - drive instance.
- * @param fileId  - id of file in Google Deive.
- * @param srcFileName - file name in local filesystem.
+ * @param opts - options.
  * @returns id of file in Google Drive
  */
-async function updateFile(drive, fileId, srcFileName) {
+async function updateFile(drive, opts) {
     try {
-        const res = await drive.files.update({
+        const { fileId, srcFileName, destMimeType, srcMimeType } = opts;
+        const params = {
             fileId,
             requestBody: {},
             media: {
-                // mimeType: 'image/jpeg',
                 body: external_fs_.createReadStream(srcFileName)
             },
             fields: 'id'
-        });
+        };
+        if (destMimeType) {
+            params.requestBody.mimeType = destMimeType;
+        }
+        if (srcMimeType) {
+            params.media.mimeType = srcMimeType;
+        }
+        const res = await drive.files.update(params);
         return res.data.id || '';
     }
     catch (err) {
         throw new UpdateFileError(JSON.stringify(err.errors));
     }
 }
-async function sendFile(drive, parentId, destFileName, srcFileName) {
+/**
+ * Send file using by source file into Google Drive.
+ * @param drive - drive instance.
+ * @param opts - options.
+ * @returns id of file in Google Drive
+ */
+async function sendFile(drive, opts) {
+    const { parentId, destFileName, srcFileName, destMimeType, srcMimeType } = opts;
     const fileId = await getFileId(drive, parentId, destFileName);
     if (fileId === '') {
-        return uploadFile(drive, parentId, destFileName, srcFileName);
+        return uploadFile(drive, {
+            parentId,
+            destFileName,
+            srcFileName,
+            destMimeType,
+            srcMimeType
+        });
     }
-    return updateFile(drive, fileId, srcFileName);
+    return updateFile(drive, { fileId, srcFileName, destMimeType, srcMimeType });
 }
-// try {
-//   const parentId = process.env['PARENT_ID'] || ''
-//   const destFileName = process.env['DEST_FILE_NAME'] || ''
-//   const srcFileName = process.env['SRC_FILE_NAME'] || ''
-//   const drive = driveClient()
-//   const id = await getFileId(drive, parentId, destFileName)
-//   console.log(id)
-//   console.log(await updateFile(drive, id, srcFileName))
-// } catch (err) {
-//   console.error('--err--')
-//   console.error(err)
-// }
+
+;// CONCATENATED MODULE: ./node_modules/guratan/dist/tshare.js
+class CreatePermissonError extends Error {
+    constructor(message) {
+        //https://stackoverflow.com/questions/41102060/typescript-extending-error-class
+        super(message);
+        Object.setPrototypeOf(this, CreatePermissonError.prototype);
+    }
+}
+class UpdatePermissonError extends Error {
+    constructor(message) {
+        //https://stackoverflow.com/questions/41102060/typescript-extending-error-class
+        super(message);
+        Object.setPrototypeOf(this, UpdatePermissonError.prototype);
+    }
+}
+/**
+ * Create permission
+ * @param drive - drive instance.
+ * @param opts
+ * @returns id of file in Google Drive
+ */
+async function createPermisson(drive, opts) {
+    let created = false;
+    try {
+        const { fileId, type, role, emailAddress, domain, view, allowFileDiscovery, moveToNewOwnersRoot, transferOwnership, sendNotificationEmail, emailMessage } = opts;
+        const createParams = {
+            requestBody: {
+                type,
+                role
+            },
+            fileId,
+            fields: 'id'
+        };
+        if (emailAddress) {
+            createParams.requestBody.emailAddress = emailAddress;
+        }
+        if (domain) {
+            createParams.requestBody.domain = domain;
+        }
+        if (view) {
+            createParams.requestBody.view = view;
+        }
+        if (allowFileDiscovery !== undefined) {
+            createParams.requestBody.allowFileDiscovery = allowFileDiscovery;
+        }
+        if (moveToNewOwnersRoot !== undefined) {
+            createParams.moveToNewOwnersRoot = moveToNewOwnersRoot;
+        }
+        if (transferOwnership !== undefined) {
+            createParams.transferOwnership = transferOwnership;
+        }
+        if (sendNotificationEmail !== undefined) {
+            createParams.sendNotificationEmail = sendNotificationEmail;
+        }
+        if (sendNotificationEmail && emailMessage) {
+            createParams.emailMessage = emailMessage;
+        }
+        const resCreate = await drive.permissions.create(createParams);
+        created = true;
+        const id = resCreate.data.id || '';
+        if (id === '') {
+            throw new CreatePermissonError('drive.permissions.create() return blank id ');
+        }
+        if (!transferOwnership) {
+            const resUpdate = await drive.permissions.update({
+                permissionId: id,
+                requestBody: {
+                    role
+                },
+                fileId,
+                fields: 'id'
+            });
+        }
+        return id;
+    }
+    catch (err) {
+        if (err.errors) {
+            if (!created) {
+                throw new CreatePermissonError(JSON.stringify(err.errors));
+            }
+            throw new UpdatePermissonError(JSON.stringify(err.errors));
+        }
+        throw err;
+    }
+}
 
 ;// CONCATENATED MODULE: ./node_modules/guratan/dist/index.js
+
+
 
 
 
