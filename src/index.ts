@@ -24,6 +24,7 @@ try {
   }
 
   const file_id = await sendFile(driveClient(), {
+    fileId: '',
     parentId,
     destFileName,
     srcFileName,
