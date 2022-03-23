@@ -2,6 +2,12 @@
 
 This action sends a file to Google Drive.
 
+## Environment Variables
+
+### `GOOGLE_APPLICATION_CREDENTIALS`
+
+**Required** path to Service Account Credentials JSON file.
+
 <!-- INSERT -->
 
 ## Example usage
