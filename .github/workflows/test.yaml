@@ -87,6 +87,14 @@ jobs:
           dest_mime_type: application/vnd.google-apps.document
           src_mime_type: text/markdown
 
+      # fileId でリモートのファイルを特定する
+      - name: Send file(with file id)
+        id: send_with_file_id
+        uses: ./
+        with:
+          file_id: ${{ steps.send.outputs.file_id }}
+          src_file_name: README.md
+
       - name: Send file(src is not exist)
         id: send_failed
         continue-on-error: true
