@@ -1,6 +1,10 @@
 name: 'Google Drive tools Action - send'
 description: 'This action sends a file to Google Drive'
 inputs:
+  file_id:
+    description: 'The ID of the file or shared drive.'
+    required: true
+    default: ''
   parent_id:
     description: 'The ID of the parent folders in remote'
     required: true

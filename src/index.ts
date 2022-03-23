@@ -2,11 +2,15 @@ import * as core from '@actions/core'
 import { driveClient, sendFile } from 'guratan'
 
 try {
+  const fileId = core.getInput('file_id')
   const parentId = core.getInput('parent_id')
   const destFileName = core.getInput('dest_file_name')
   const srcFileName = core.getInput('src_file_name')
   const destMimeType = core.getInput('dest_mime_type')
   const srcMimeType = core.getInput('src_mime_type')
+  if (typeof fileId !== 'string' || fileId === '') {
+    throw new Error(`file_id: the input is invalid : ${fileId}`)
+  }
   if (typeof parentId !== 'string' || parentId === '') {
     throw new Error(`parent_id: the input is invalid : ${parentId}`)
   }
@@ -24,7 +28,7 @@ try {
   }
 
   const file_id = await sendFile(driveClient(), {
-    fileId: '',
+    fileId,
     parentId,
     destFileName,
     srcFileName,

@@ -55097,11 +55097,15 @@ __nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__) => {
 
 
 try {
+    const fileId = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('file_id');
     const parentId = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('parent_id');
     const destFileName = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('dest_file_name');
     const srcFileName = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('src_file_name');
     const destMimeType = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('dest_mime_type');
     const srcMimeType = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('src_mime_type');
+    if (typeof fileId !== 'string' || fileId === '') {
+        throw new Error(`file_id: the input is invalid : ${fileId}`);
+    }
     if (typeof parentId !== 'string' || parentId === '') {
         throw new Error(`parent_id: the input is invalid : ${parentId}`);
     }
@@ -55118,6 +55122,7 @@ try {
         throw new Error(`src_mime_type: the input is invalid : ${srcMimeType}`);
     }
     const file_id = await (0,guratan__WEBPACK_IMPORTED_MODULE_1__/* .sendFile */ .kB)((0,guratan__WEBPACK_IMPORTED_MODULE_1__/* .driveClient */ .GQ)(), {
+        fileId,
         parentId,
         destFileName,
         srcFileName,
@@ -55369,7 +55374,7 @@ class UpdateFileError extends Error {
  * @param fileName  - file name.
  * @returns id of file or blank(when file is not found)
  */
-async function getFileId(drive, parentId, fileName) {
+async function tsend_getFileId(drive, parentId, fileName) {
     try {
         if (validateQueryValue(parentId) === false) {
             throw new GetFileIdError(`Invalid paretnt id : ${parentId}`);
@@ -55463,8 +55468,8 @@ async function updateFile(drive, opts) {
  * @returns id of file in Google Drive
  */
 async function sendFile(drive, opts) {
-    const { parentId, destFileName, srcFileName, destMimeType, srcMimeType } = opts;
-    const fileId = await getFileId(drive, parentId, destFileName);
+    const { fileId: inFileId, parentId, destFileName, srcFileName, destMimeType, srcMimeType } = opts;
+    let fileId = inFileId !== '' ? inFileId : await tsend_getFileId(drive, parentId, destFileName);
     if (fileId === '') {
         return uploadFile(drive, {
             parentId,
@@ -55478,6 +55483,7 @@ async function sendFile(drive, opts) {
 }
 
 ;// CONCATENATED MODULE: ./node_modules/guratan/dist/tshare.js
+
 class CreatePermissonError extends Error {
     constructor(message) {
         //https://stackoverflow.com/questions/41102060/typescript-extending-error-class
@@ -55501,7 +55507,8 @@ class UpdatePermissonError extends Error {
 async function createPermisson(drive, opts) {
     let created = false;
     try {
-        const { fileId, type, role, emailAddress, domain, view, allowFileDiscovery, moveToNewOwnersRoot, transferOwnership, sendNotificationEmail, emailMessage } = opts;
+        const { fileId: inFileId, parentId, destFileName, type, role, emailAddress, domain, view, allowFileDiscovery, moveToNewOwnersRoot, transferOwnership, sendNotificationEmail, emailMessage } = opts;
+        const fileId = inFileId || (await getFileId(drive, parentId, destFileName));
         const createParams = {
             requestBody: {
                 type,
