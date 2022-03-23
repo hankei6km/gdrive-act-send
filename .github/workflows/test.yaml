@@ -89,7 +89,7 @@ jobs:
 
       # fileId でリモートのファイルを特定する
       - name: Send file(with file id)
-        id: send_with_mime2
+        id: send_with_file_id
         uses: ./
         with:
           parent_id: ${{ steps.send.outputs.file_id }}
