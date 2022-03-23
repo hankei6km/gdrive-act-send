@@ -8,9 +8,9 @@ This action sends a file to Google Drive.
 
 | parameter | description | required | default |
 | - | - | - | - |
-| file_id | The ID of the file or shared drive. | `true` |  |
-| parent_id | The ID of the parent folders in remote | `true` |  |
-| dest_file_name | The name of the file in remote | `true` |  |
+| file_id | The ID of the file or shared drive. | `false` |  |
+| parent_id | The ID of the parent folders in remote | `false` |  |
+| dest_file_name | The name of the file in remote | `false` |  |
 | src_file_name | The name(path) of the file in local filesystem | `true` |  |
 | dest_mime_type | The MIME type of the file. | `false` |  |
 | src_mime_type | Media mime-type | `false` |  |

@@ -8,13 +8,13 @@ try {
   const srcFileName = core.getInput('src_file_name')
   const destMimeType = core.getInput('dest_mime_type')
   const srcMimeType = core.getInput('src_mime_type')
-  if (typeof fileId !== 'string' || fileId === '') {
+  if (typeof fileId !== 'string') {
     throw new Error(`file_id: the input is invalid : ${fileId}`)
   }
-  if (typeof parentId !== 'string' || parentId === '') {
+  if (typeof parentId !== 'string') {
     throw new Error(`parent_id: the input is invalid : ${parentId}`)
   }
-  if (typeof destFileName !== 'string' || destFileName === '') {
+  if (typeof destFileName !== 'string') {
     throw new Error(`dest_file_name: the input is invalid : ${destFileName}`)
   }
   if (typeof srcFileName !== 'string' || srcFileName === '') {

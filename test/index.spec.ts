@@ -33,47 +33,6 @@ afterAll(() => {
 describe('index', () => {
   const __dirname = path.dirname(fileURLToPath(import.meta.url))
   const ip = path.join(__dirname, '..', 'dist', 'index.js')
-  it('should print error message(fileId = blank)', async () => {
-    process.env['INPUT_FILE_ID'] = ''
-    process.env['INPUT_PARENT_ID'] = 'parentId'
-    process.env['INPUT_DEST_FILE_NAME'] = 'destFileName'
-    process.env['INPUT_SRC_FILE_NAME'] = 'srcFileName'
-    const [stdout, stderr] = await new Promise((resolve) => {
-      cp.exec(`node ${ip}`, { env: process.env }, (_err, stdout, stderr) => {
-        resolve([stdout.toString(), stderr.toString()])
-      })
-    })
-    expect(stdout).toMatch(/\:\:error\:\:file_id\: the input is invalid \:/)
-    expect(stderr).toEqual('')
-  })
-  it('should print error message(parentId = blank)', async () => {
-    process.env['INPUT_FILE_ID'] = 'fileId'
-    process.env['INPUT_PARENT_ID'] = ''
-    process.env['INPUT_DEST_FILE_NAME'] = 'destFileName'
-    process.env['INPUT_SRC_FILE_NAME'] = 'srcFileName'
-    const [stdout, stderr] = await new Promise((resolve) => {
-      cp.exec(`node ${ip}`, { env: process.env }, (_err, stdout, stderr) => {
-        resolve([stdout.toString(), stderr.toString()])
-      })
-    })
-    expect(stdout).toMatch(/\:\:error\:\:parent_id\: the input is invalid \:/)
-    expect(stderr).toEqual('')
-  })
-  it('should print error message(destFileName = blank)', async () => {
-    process.env['INPUT_FILE_ID'] = 'fileId'
-    process.env['INPUT_PARENT_ID'] = 'parentId'
-    process.env['INPUT_DEST_FILE_NAME'] = ''
-    process.env['INPUT_SRC_FILE_NAME'] = 'srcFileName'
-    const [stdout, stderr] = await new Promise((resolve) => {
-      cp.exec(`node ${ip}`, { env: process.env }, (_err, stdout, stderr) => {
-        resolve([stdout.toString(), stderr.toString()])
-      })
-    })
-    expect(stdout).toMatch(
-      /\:\:error\:\:dest_file_name\: the input is invalid \:/
-    )
-    expect(stderr).toEqual('')
-  })
   it('should print error message(srcFileName = blank)', async () => {
     process.env['INPUT_FILE_ID'] = 'fileId'
     process.env['INPUT_PARENT_ID'] = 'parentId'
