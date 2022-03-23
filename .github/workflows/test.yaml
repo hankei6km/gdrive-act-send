@@ -94,8 +94,6 @@ jobs:
         with:
           file_id: ${{ steps.send.outputs.file_id }}
           src_file_name: README.md
-          dest_mime_type: application/vnd.google-apps.document
-          src_mime_type: text/markdown
 
       - name: Send file(src is not exist)
         id: send_failed
