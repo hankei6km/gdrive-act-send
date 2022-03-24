@@ -33,6 +33,17 @@ jobs:
       - name: Install modules
         run: npm ci
 
+      - name: Run build
+        run: npm run test:build
+
+      - name: Diff built files
+        run: |
+          git diff --exit-code dist/index.js
+          git diff --exit-code dist/index.d.ts
+          git diff --exit-code dist/license.txt
+          git diff --exit-code dist/package.jskn
+          git diff --exit-code README.md
+
       - name: Run tests
         run: npm run test:build
 
