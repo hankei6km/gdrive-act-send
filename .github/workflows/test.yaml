@@ -41,7 +41,7 @@ jobs:
           git diff --exit-code dist/index.js
           git diff --exit-code dist/index.d.ts
           git diff --exit-code dist/licenses.txt
-          git diff --exit-code dist/package.jskn
+          git diff --exit-code dist/package.json
           git diff --exit-code README.md
 
       - name: Run tests
