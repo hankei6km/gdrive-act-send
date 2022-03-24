@@ -10,7 +10,7 @@ on:
 jobs:
   test-modules:
     runs-on: ubuntu-latest
-    name: Test modiules
+    name: Test modules
     steps:
       - uses: actions/checkout@v3
 
