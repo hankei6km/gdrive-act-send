@@ -1,7 +1,6 @@
 # Google Drive tools Action - send
 
 This action sends a file to Google Drive.
-確認(これは diff で落ちるはす)
 
 ## Environment Variables
 
