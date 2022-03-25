@@ -38,11 +38,11 @@ jobs:
 
       - name: Diff built files
         run: |
-          git diff --exit-code dist/index.js --quiet
-          git diff --exit-code dist/index.d.ts --quiet
-          git diff --exit-code dist/licenses.txt --quiet
-          git diff --exit-code dist/package.json --quiet
-          git diff --exit-code README.md --quiet
+          git diff --exit-code --quiet dist/index.js
+          git diff --exit-code --quiet dist/index.d.ts
+          git diff --exit-code --quiet dist/licenses.txt
+          git diff --exit-code --quiet dist/package.json
+          git diff --exit-code --quiet README.md
 
       - name: Run tests
         run: npm run test:build
