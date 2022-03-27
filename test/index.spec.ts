@@ -32,7 +32,7 @@ afterAll(() => {
 
 describe('index', () => {
   const __dirname = path.dirname(fileURLToPath(import.meta.url))
-  const ip = path.join(__dirname, '..', 'dist', 'index.js')
+  const ip = path.join(__dirname, '..', 'dist', 'index.mjs')
   it('should print error message(srcFileName = blank)', async () => {
     process.env['INPUT_FILE_ID'] = 'fileId'
     process.env['INPUT_PARENT_ID'] = 'parentId'

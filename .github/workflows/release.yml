@@ -21,17 +21,9 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
 
-      # Build が重複するが確認はしておく.
+      # Build が重複するが、ライセンスのファイルを事前に release へアップロードするため.
       - name: Run build
         run: npm run build
-
-      - name: Diff built files
-        run: |
-          git diff --exit-code --quiet dist/index.js
-          git diff --exit-code --quiet dist/index.d.ts
-          git diff --exit-code --quiet dist/licenses.txt
-          git diff --exit-code --quiet dist/package.json
-          git diff --exit-code --quiet README.md
 
       - name: Make licenses.zip file
         run: zip "./licenses.zip" dist/licenses.txt
