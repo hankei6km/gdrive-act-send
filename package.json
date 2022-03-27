@@ -12,7 +12,7 @@
     "url": "https://github.com/hankei6km/gdrive-act-send"
   },
   "keywords": [],
-  "main": "",
+  "main": "dist/index.js",
   "type": "module",
   "files": [
     "dist"
