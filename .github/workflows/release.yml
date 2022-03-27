@@ -22,6 +22,20 @@ jobs:
         uses: actions/setup-node@v2
 
       # Build が重複するが、ライセンスのファイルを事前に release へアップロードするため.
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-rel-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-rel-${{ env.cache-name }}-
+            ${{ runner.os }}-rel-
+
+      - name: Install modules
+        run: npm ci
+
       - name: Run build
         run: npm run build
 
