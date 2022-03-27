@@ -9,7 +9,7 @@ on:
     types: [published, edited]
 
 jobs:
-  publish:
+  buiuld-and-tag:
     runs-on: ubuntu-latest
     steps:
       # Release with semantic tag like v1.0.3
