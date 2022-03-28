@@ -82,6 +82,16 @@ jobs:
         env:
           FILE_ID: ${{ steps.send.outputs.file_id }}
 
+      - name: Receive file to cehck content(use file id)
+        uses: hankei6km/gdrive-act-recv@v0
+        with:
+          file_id: ${{ steps.send.outputs.file_id }}
+          dest_file_name: test_text.md
+
+      - name: Check content
+        run: |
+          diff -q README.md test_text.md
+
       - name: Send file(with mime type)
         id: send_with_mime
         uses: ./
