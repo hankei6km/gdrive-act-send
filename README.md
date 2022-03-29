@@ -26,7 +26,7 @@ This action sends a file to Google Drive.
 
 | parameter | description |
 | - | - |
-| file_id | The ID of the file that is sended into Google Drive |
+| file_id | The ID of the file that is sended into Google Drive. Be careful, the ID of the file can also be sensitive data. |
 
 
 ## Runs

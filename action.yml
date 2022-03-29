@@ -27,7 +27,7 @@ inputs:
     default: ''
 outputs:
   file_id:
-    description: 'The ID of the file that is sended into Google Drive'
+    description: 'The ID of the file that is sended into Google Drive. Be careful, the ID of the file can also be sensitive data.'
 runs:
   using: 'node16'
   main: 'dist/index.mjs'
