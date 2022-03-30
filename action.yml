@@ -31,3 +31,6 @@ outputs:
 runs:
   using: 'node16'
   main: 'dist/index.mjs'
+branding:
+  icon: 'upload-cloud'
+  color: blue'
