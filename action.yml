@@ -33,4 +33,4 @@ runs:
   main: 'dist/index.mjs'
 branding:
   icon: 'upload-cloud'
-  color: blue'
+  color: 'blue'
