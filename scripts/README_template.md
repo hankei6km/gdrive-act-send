@@ -22,7 +22,7 @@ This action sends a file to Google Drive.
 
 - name: Send file
   id: send
-  uses: hankei6km/gdrive-act-send@v0
+  uses: hankei6km/gdrive-act-send@v:CUR_VER
   with:
     parent-id: ${{ secrets.PARENT_ID }}
     dest-file-name: ${{ secrets.DEST_FILE_NAME }}
