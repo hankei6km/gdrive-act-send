@@ -54,6 +54,11 @@ This action is an `node16` action.
     src-file-name: ${{ secrets.SRC_FILE_NAME }}
 ```
 
+## Related
+
+- [Google Drive tools Action - share](https://github.com/hankei6km/gdrive-act-share)
+- [Google Drive tools Action - recv](https://github.com/hankei6km/gdrive-act-recv)
+
 ## Licenses
 
 MIT License
