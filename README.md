@@ -31,7 +31,7 @@ This action sends a file to Google Drive.
 
 ## Runs
 
-This action is an `node16` action.
+This action is a `node16` action.
 
 
 
