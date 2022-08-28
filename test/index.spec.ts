@@ -38,7 +38,7 @@ describe('index', () => {
     process.env['INPUT_PARENT_ID'] = 'parentId'
     process.env['INPUT_DEST_FILE_NAME'] = 'destFileName'
     process.env['INPUT_SRC_FILE_NAME'] = ''
-    const [stdout, stderr] = await new Promise((resolve) => {
+    const [stdout, stderr]: [string, string] = await new Promise((resolve) => {
       cp.exec(`node ${ip}`, { env: process.env }, (_err, stdout, stderr) => {
         resolve([stdout.toString(), stderr.toString()])
       })
