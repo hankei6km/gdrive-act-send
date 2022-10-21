@@ -36,6 +36,10 @@ jobs:
       - name: Run tests
         run: npm run test:build
 
+      - name: Diff built files
+        run: |
+          git diff --exit-code --quiet README.md
+
   test-main:
     permissions:
       contents: 'read'
