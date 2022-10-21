@@ -24,9 +24,9 @@ This action sends a file to Google Drive.
   id: send
   uses: hankei6km/gdrive-act-send@v:CUR_VER
   with:
-    parent-id: ${{ secrets.PARENT_ID }}
-    dest-file-name: ${{ secrets.DEST_FILE_NAME }}
-    src-file-name: ${{ secrets.SRC_FILE_NAME }}
+    parent_id: ${{ secrets.PARENT_ID }}
+    dest_file_name: ${{ secrets.DEST_FILE_NAME }}
+    src_file_name: ${{ secrets.SRC_FILE_NAME }}
 ```
 
 ## Related
