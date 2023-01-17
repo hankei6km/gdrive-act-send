@@ -75,7 +75,8 @@ jobs:
 
       - name: Send file(normal end)
         id: send
-        uses: ./
+        #uses: ./
+        uses: hankei6km/gdrive-act-send@v0.5.0
         with:
           parent_id: ${{ secrets.PARENT_ID }}
           dest_file_name: gdrive-act-send-test-readme.md
