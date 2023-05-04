@@ -20,6 +20,7 @@ This action sends a file to Google Drive.
 | src_file_name | The name(path) of the file in local filesystem | `true` |  |
 | dest_mime_type | The MIME type of the file. | `false` |  |
 | src_mime_type | Media mime-type | `false` |  |
+| supports_all_drives | Supports both My Drives and shared drives(`includeItemsFromAllDrives` is also enabled) | `false` |  |
 
 
 ## Outputs

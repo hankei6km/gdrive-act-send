@@ -15,19 +15,22 @@ const saveInputs = {
   fileId: process.env['INPUT_FILE_ID'],
   parentId: process.env['INPUT_PARENT_ID'],
   destFileName: process.env['INPUT_DEST_FILE_NAME'],
-  srcFileName: process.env['INPUT_SRC_FILE_NAME']
+  srcFileName: process.env['INPUT_SRC_FILE_NAME'],
+  supportsAllDrives: process.env['INPUT_SUPPORTS_ALL_DRIVES']
 }
 beforeEach(() => {
   process.env['INPUT_FILE_ID'] = saveInputs.fileId
   process.env['INPUT_PARENT_ID'] = saveInputs.parentId
   process.env['INPUT_DEST_FILE_NAME'] = saveInputs.destFileName
   process.env['INPUT_SRC_FILE_NAME'] = saveInputs.srcFileName
+  process.env['INPUT_SUPPORTS_ALL_DRIVES'] = saveInputs.supportsAllDrives
 })
 afterAll(() => {
   process.env['INPUT_FILE_ID'] = saveInputs.fileId
   process.env['INPUT_PARENT_ID'] = saveInputs.parentId
   process.env['INPUT_DEST_FILE_NAME'] = saveInputs.destFileName
   process.env['INPUT_SRC_FILE_NAME'] = saveInputs.srcFileName
+  process.env['INPUT_SUPPORTS_ALL_DRIVES'] = saveInputs.supportsAllDrives
 })
 
 describe('index', () => {
@@ -38,6 +41,7 @@ describe('index', () => {
     process.env['INPUT_PARENT_ID'] = 'parentId'
     process.env['INPUT_DEST_FILE_NAME'] = 'destFileName'
     process.env['INPUT_SRC_FILE_NAME'] = ''
+    process.env['INPUT_SUPPORTS_ALL_DRIVES'] = 'false'
     const [stdout, stderr]: [string, string] = await new Promise((resolve) => {
       cp.exec(`node ${ip}`, { env: process.env }, (_err, stdout, stderr) => {
         resolve([stdout.toString(), stderr.toString()])

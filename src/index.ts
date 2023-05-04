@@ -1,6 +1,14 @@
 import * as core from '@actions/core'
 import { driveClient, sendFile } from 'guratan'
 
+export function optionalBoolean(s: string): boolean | undefined {
+  const t = core.getInput(s)
+  if (t === undefined || t === 'undefined' || t === '') {
+    return
+  }
+  return core.getBooleanInput(s)
+}
+
 try {
   const fileId = core.getInput('file_id')
   const parentId = core.getInput('parent_id')
@@ -8,6 +16,7 @@ try {
   const srcFileName = core.getInput('src_file_name')
   const destMimeType = core.getInput('dest_mime_type')
   const srcMimeType = core.getInput('src_mime_type')
+  const supportsAllDrives = optionalBoolean('supports_all_drives')
   if (typeof fileId !== 'string') {
     throw new Error(`file_id: the input is invalid : ${fileId}`)
   }
@@ -33,7 +42,8 @@ try {
     destFileName,
     srcFileName,
     destMimeType,
-    srcMimeType
+    srcMimeType,
+    supportsAllDrives
   })
 
   core.setSecret(file_id)

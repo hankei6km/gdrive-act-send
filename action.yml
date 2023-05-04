@@ -25,6 +25,10 @@ inputs:
     description: 'Media mime-type'
     required: false
     default: ''
+  supports_all_drives:
+    description: 'Supports both My Drives and shared drives(`includeItemsFromAllDrives` is also enabled)'
+    required: false
+    default: ''
 outputs:
   file_id:
     description: 'The ID of the file that is sended into Google Drive. Be careful, the ID of the file can also be sensitive data.'
