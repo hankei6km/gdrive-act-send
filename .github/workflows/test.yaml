@@ -139,3 +139,29 @@ jobs:
         run: test "${FAILURE}" = "failure"
         env:
           FAILURE: ${{ steps.send_failed.outcome }}
+
+      # supportsAllDrives のテスト(指定だけで共有ドライブは利用していない)
+      - name: Send file(normal end with supports all drives)
+        id: supports_all_drives_send
+        uses: ./
+        with:
+          # TODO: 共有ドライブが使えるようことがあれば、ここを共有ドライブの id へ変更する
+          parent_id: ${{ secrets.PARENT_ID }}
+          dest_file_name: gdrive-act-send-test-readme-supports-all-drives.md
+          src_file_name: README.md
+          supports_all_drives: true
+
+      - name: Check file_id(supports all drives)
+        run: test -n "${FILE_ID}"
+        env:
+          FILE_ID: ${{ steps.supports_all_drives_send.outputs.file_id }}
+
+      - name: Receive file to cehck content(use file id with supports all drives)
+        uses: hankei6km/gdrive-act-recv@v0
+        with:
+          file_id: ${{ steps.supports_all_drives_send.outputs.file_id }}
+          dest_file_name: test_text-support-all-drives.md
+
+      - name: Check content(supports all drives)
+        run: |
+          diff -q README.md test_text-support-all-drives.md
