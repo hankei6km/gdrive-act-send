@@ -12,22 +12,22 @@ This action sends a file to Google Drive.
 
 ## Inputs
 
-| parameter | description | required | default |
+| name | description | required | default |
 | --- | --- | --- | --- |
-| file_id | The ID of the file or shared drive. | `false` |  |
-| parent_id | The ID of the parent folders in remote | `false` |  |
-| dest_file_name | The name of the file in remote | `false` |  |
-| src_file_name | The name(path) of the file in local filesystem | `true` |  |
-| dest_mime_type | The MIME type of the file. | `false` |  |
-| src_mime_type | Media mime-type | `false` |  |
-| supports_all_drives | Supports both My Drives and shared drives(`includeItemsFromAllDrives` is also enabled) | `false` |  |
+| `file_id` | <p>The ID of the file or shared drive.</p> | `false` | `""` |
+| `parent_id` | <p>The ID of the parent folders in remote</p> | `false` | `""` |
+| `dest_file_name` | <p>The name of the file in remote</p> | `false` | `""` |
+| `src_file_name` | <p>The name(path) of the file in local filesystem</p> | `true` | `""` |
+| `dest_mime_type` | <p>The MIME type of the file.</p> | `false` | `""` |
+| `src_mime_type` | <p>Media mime-type</p> | `false` | `""` |
+| `supports_all_drives` | <p>Supports both My Drives and shared drives(<code>includeItemsFromAllDrives</code> is also enabled)</p> | `false` | `""` |
 
 
 ## Outputs
 
-| parameter | description |
+| name | description |
 | --- | --- |
-| file_id | The ID of the file that is sended into Google Drive. Be careful, the ID of the file can also be sensitive data. |
+| `file_id` | <p>The ID of the file that is sended into Google Drive. Be careful, the ID of the file can also be sensitive data.</p> |
 
 
 ## Runs
