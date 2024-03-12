@@ -8,7 +8,11 @@ This action sends a file to Google Drive.
 
 **Required** path to Service Account Credentials JSON file.
 
-<!-- INSERT -->
+<!-- action-docs-inputs source="action.yml" -->
+
+<!-- action-docs-outputs source="action.yml" -->
+
+<!-- action-docs-runs source="action.yml" -->
 
 ## Example usage
 
