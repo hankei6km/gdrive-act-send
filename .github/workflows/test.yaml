@@ -104,7 +104,7 @@ jobs:
           dest_file_name: gdrive-act-send-test-readme.doc
           src_file_name: README.md
           dest_mime_type: application/vnd.google-apps.document
-          src_mime_type: text/markdown
+          src_mime_type: text/plain
 
       # mimeType ありで upload されている場合、
       # 上書きするには local 側の mimeType の指定がなければエラーになる(はず)
@@ -116,7 +116,7 @@ jobs:
           dest_file_name: gdrive-act-send-test-readme.doc
           src_file_name: README.md
           dest_mime_type: application/vnd.google-apps.document
-          src_mime_type: text/markdown
+          src_mime_type: text/plain
 
       # fileId でリモートのファイルを特定する
       - name: Send file(with file id)
