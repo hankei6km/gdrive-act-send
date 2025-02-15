@@ -42,7 +42,7 @@ This action is a `node20` action.
 
 - name: Send file
   id: send
-  uses: hankei6km/gdrive-act-send@v0.6.4
+  uses: hankei6km/gdrive-act-send@v0.6.5
   with:
     parent_id: ${{ secrets.PARENT_ID }}
     dest_file_name: ${{ secrets.DEST_FILE_NAME }}
