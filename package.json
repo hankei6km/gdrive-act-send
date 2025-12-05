@@ -1,6 +1,6 @@
 {
   "name": "@hankei6km/gdrive-act-send",
-  "version": "0.6.8",
+  "version": "0.6.9",
   "description": "This action sends a file to Google Drive.",
   "author": "hankei6km <hankei6km@gmail.com> (https://github.com/hankei6km)",
   "license": "MIT",
