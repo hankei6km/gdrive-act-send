@@ -6,10 +6,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/hankei6km/gdrive-act-send"
+    "url": "git+https://github.com/hankei6km/gdrive-act-send"
   },
   "bugs": {
-    "url": "https://github.com/hankei6km/gdrive-act-send"
+    "url": "https://github.com/hankei6km/gdrive-act-send/issues"
   },
   "keywords": [],
   "main": "dist/index.mjs",
