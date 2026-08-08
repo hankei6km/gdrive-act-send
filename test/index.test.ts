@@ -1,5 +1,6 @@
+import { describe, it, beforeEach, after } from 'node:test'
+import assert from 'node:assert/strict'
 import { fileURLToPath } from 'node:url'
-import { jest } from '@jest/globals'
 import * as process from 'process'
 import * as cp from 'child_process'
 import * as path from 'path'
@@ -25,7 +26,7 @@ beforeEach(() => {
   process.env['INPUT_SRC_FILE_NAME'] = saveInputs.srcFileName
   process.env['INPUT_SUPPORTS_ALL_DRIVES'] = saveInputs.supportsAllDrives
 })
-afterAll(() => {
+after(() => {
   process.env['INPUT_FILE_ID'] = saveInputs.fileId
   process.env['INPUT_PARENT_ID'] = saveInputs.parentId
   process.env['INPUT_DEST_FILE_NAME'] = saveInputs.destFileName
@@ -47,9 +48,7 @@ describe('index', () => {
         resolve([stdout.toString(), stderr.toString()])
       })
     })
-    expect(stdout).toMatch(
-      /\:\:error\:\:src_file_name\: the input is invalid \:/
-    )
-    expect(stderr).toEqual('')
+    assert.match(stdout, /\:\:error\:\:src_file_name\: the input is invalid \:/)
+    assert.strictEqual(stderr, '')
   })
 })
