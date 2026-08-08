@@ -38,6 +38,6 @@
     "@types/node": "^26.2.0",
     "action-docs": "^2.5.1",
     "esbuild": "0.28.1",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   }
 }
