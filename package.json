@@ -37,7 +37,7 @@
     "@hankei6km/files-to-licenses": "^0.1.1",
     "@types/node": "^26.2.0",
     "action-docs": "^2.5.1",
-    "esbuild": "0.28.1",
+    "esbuild": "0.28.2",
     "typescript": "^7.0.2"
   }
 }
